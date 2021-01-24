@@ -2,25 +2,73 @@ import React from "react";
 import "./App.css";
 
 function App() {
+  const [running, setRunning] = React.useState<boolean>(false);
+
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-row ">
-      <div className="flex min-h-full  w-2/3 border-r border-blue-700 justify-center items-center flex-col">
+    <div className="min-h-screen bg-gray-50 flex flex-row ">
+      <div className="flex min-h-full  w-2/3 border-r border-blue-700 border-opacity-80 justify-center items-center flex-col">
         <div className="m-10">
           <p className="font-semibold text-6xl font-sans text-red-500">
             Take a Break!
           </p>
         </div>
-        <div className="bg-white shadow-sm rounded-lg pt-6 pb-9 px-6  border-b-4 border-gray-200">
-          <p className="text-blue-600 text-8xl font-bold font-sans ">24:48</p>
+        <div className="bg-blue-500 shadow-md  pt-6 pb-9 px-6  border-b-5 rounded-lg border-blue-600">
+          <p className="text-white text-8xl font-bold font-sans ">24:48</p>
         </div>
 
         <div
           onClick={() => {
-            console.log("henlo");
+            setRunning(!running);
           }}
-          className="mt-10"
+          className="mt-10 cursor-pointer"
         >
-          <svg
+          {running ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="50"
+              height="50"
+              viewBox="0 0 80 80"
+            >
+              <defs></defs>
+              <g fill="none" stroke="#1d4ed8">
+                <circle stroke="none" cx="40" cy="40" r="40" />
+                <circle fill="none" cx="40" cy="40" r="39.5" />
+              </g>
+              <rect
+                fill="#1d4ed8"
+                width="9"
+                height="23"
+                transform="translate(27 29)"
+              />
+              <rect
+                width="9"
+                height="23"
+                fill="#1d4ed8"
+                transform="translate(44 29)"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="50"
+              height="50"
+              viewBox="0 0 80 80"
+            >
+              <defs></defs>
+              <g className="a" stroke="#dc2626" fill="none">
+                <circle className="c" stroke="none" cx="40" cy="40" r="40" />
+                <circle className="d" fill="none" cx="40" cy="40" r="39.5" />
+              </g>
+              <path
+                className="b"
+                fill="#dc2626"
+                d="M11,0,22,22H0Z"
+                transform="translate(54 30) rotate(90)"
+              />
+            </svg>
+          )}
+
+          {/* <svg
             className="w-8 h-8 animate-bounce cursor-pointer "
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 511.999 511.999"
@@ -35,10 +83,10 @@ function App() {
 			           c-9.404,5.758-12.36,18.049-6.602,27.452c5.757,9.404,18.048,12.36,27.452,6.602l218.611-133.852
 			           c20.931-12.769,33.457-35.029,33.507-59.55C477.165,232.079,464.729,209.767,443.86,196.919z"
             />
-          </svg>
+          </svg> */}
         </div>
       </div>
-      <div className="bg-white min-h-full w-1/3 border-l-4 border-blue-700">
+      <div className="bg-white min-h-full w-1/3 border-l-4 border-blue-700 border-opacity-80">
         <p>here is some text as wells</p>
       </div>
     </div>
