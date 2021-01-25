@@ -6,6 +6,12 @@ module.exports = {
       borderWidth: {
         28: "28px",
         5: "5px",
+        6: "6px",
+      },
+
+      fontFamily: {
+        roboto: "Roboto",
+        trocchi: "Trocchi",
       },
     },
   },
