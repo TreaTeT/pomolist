@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       borderWidth: {
         28: "28px",
+        3: "3px",
         5: "5px",
         6: "6px",
       },
