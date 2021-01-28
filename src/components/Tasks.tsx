@@ -1,18 +1,26 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { v4 as uuidv4 } from "uuid";
 
 function Tasks() {
   interface ITodo {
     todo: string;
     id: string;
+    checked: boolean;
   }
 
-  const { register, handleSubmit } = useForm<ITodo>();
+  const { register, handleSubmit, reset } = useForm<ITodo>();
 
-  const [todos, setTodos] = React.useState<string[]>([]);
+  const [todos, setTodos] = React.useState<ITodo[]>([]);
 
   const onSubmit = ({ todo }: ITodo) => {
-    setTodos([...todos, todo]);
+    let id = uuidv4();
+    setTodos([...todos, { todo: todo, id: id, checked: false }]);
+    reset();
+  };
+
+  const handleDelete = (id: string): void => {
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
@@ -49,25 +57,27 @@ function Tasks() {
         </form>
       </div>
 
-      {todos.map((sentence) => {
+      {todos.map((todo, index) => {
         return (
-          <div className="w-2/3 mx-auto flex  m-5 px-2  py-2 border-b border-blue-600 justify-between">
+          <div
+            key={todo.id}
+            className="w-2/3 mx-auto flex  m-5   py-2 border-b border-blue-600 justify-between"
+          >
             <div className="flex">
-              {/* <input
-                className="outline-none ring-0 rounded focus:ring-2 ring-blue-300 mx-3"
-                type="checkbox"
-                id="customvalue"
-                name="todo"
-                value="todo"
-              ></input> */}
-
-              <div className="flex items-center ml-2 mr-4 ">
+              <div className="flex items-center  mr-4 ">
                 <input
                   type="checkbox"
                   id="A3-yes"
                   name="A3-confirmation"
-                  value="yes"
                   className="cursor-pointer opacity-0 absolute h-5 w-5"
+                  onChange={() => {
+                    let newArr = [...todos];
+                    newArr[index] = {
+                      ...newArr[index],
+                      checked: !newArr[index].checked,
+                    };
+                    setTodos(newArr);
+                  }}
                 />
                 <div className="bg-white border-2 rounded-md border-blue-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500">
                   <svg
@@ -76,11 +86,11 @@ function Tasks() {
                     viewBox="0 0 17 12"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <g fill="none" fill-rule="evenodd">
+                    <g fill="none" fillRule="evenodd">
                       <g
                         transform="translate(-9 -11)"
                         fill="#1F73F1"
-                        fill-rule="nonzero"
+                        fillRule="nonzero"
                       >
                         <path d="m25.576 11.414c0.56558 0.55188 0.56558 1.4439 0 1.9961l-9.404 9.176c-0.28213 0.27529-0.65247 0.41385-1.0228 0.41385-0.37034 0-0.74068-0.13855-1.0228-0.41385l-4.7019-4.588c-0.56584-0.55188-0.56584-1.4442 0-1.9961 0.56558-0.55214 1.4798-0.55214 2.0456 0l3.679 3.5899 8.3812-8.1779c0.56558-0.55214 1.4798-0.55214 2.0456 0z" />
                       </g>
@@ -90,10 +100,17 @@ function Tasks() {
                 <label className="select-none"></label>
               </div>
 
-              <p className="font-roboto text-lg text-white">{sentence}</p>
+              <p
+                className={`font-roboto text-lg text-white ${
+                  todo.checked ? "line-through" : "no-underline"
+                }`}
+              >
+                {todo.todo}
+              </p>
             </div>
-            <div className="flex items-center pr-2 right-0">
+            <div className="flex items-center pr-2">
               <svg
+                onClick={() => handleDelete(todo.id)}
                 xmlns="http://www.w3.org/2000/svg"
                 width="10"
                 height="10"
