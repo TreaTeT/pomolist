@@ -1,18 +1,20 @@
 import React from "react";
 
-function Timer() {
-  // MAYBE REPLACE THE USESTATE WITH USEREDUCER
-  interface ITimer {
-    time: number;
-    running: boolean;
-    minutes: string;
-    seconds: string;
-    cycles: number;
-    work: boolean;
-  }
+// LOOK INTO USEREDUCER FOR THIS
 
+interface ITimer {
+  // time: number;
+  running: boolean;
+  minutes: string;
+  seconds: string;
+  cycles: number;
+  work: boolean;
+}
+
+function Timer() {
+  const [time, setTime] = React.useState<number>(1500);
   const [timer, setTimer] = React.useState<ITimer>({
-    time: 1500,
+    // time: 1500,
     running: false,
     minutes: "25",
     seconds: "0",
@@ -22,54 +24,54 @@ function Timer() {
 
   React.useEffect(() => {
     if (timer.running) {
-      timer.time > 0 &&
-        setTimeout(() => setTimer({ ...timer, time: timer.time - 1 }), 1000);
-
-      let calc_minutes = Math.floor(timer.time / 60);
-      let calc_seconds = timer.time - calc_minutes * 60;
-
+      time > 0 && setTimeout(() => setTime(time - 1), 1000);
+      let calc_minutes = Math.floor(time / 60);
+      let calc_seconds = time - calc_minutes * 60;
       setTimer({
         ...timer,
         minutes: calc_minutes.toString(),
         seconds: calc_seconds.toString(),
       });
 
-      if (timer.time === 0) {
+      if (time === 0) {
         if (timer.cycles + 1 === 7) {
           console.log("Oooh time for a long break");
           setTimer({
             running: false,
-            time: 1200,
+            // time: 1200,
             minutes: "20",
             seconds: "0",
             work: false,
             cycles: 0,
           });
+          setTime(1200);
         } else if (timer.work) {
           console.log("time for a break");
           setTimer({
             running: false,
-            time: 300,
+            // time: 300,
             minutes: "5",
             seconds: "0",
             work: false,
             cycles: timer.cycles + 1,
           });
+          setTime(300);
         } else {
           console.log("You should get back to work young man");
           setTimer({
             running: false,
-            time: 1500,
+            // time: 1500,
             minutes: "25",
             seconds: "0",
             work: true,
             cycles: timer.cycles + 1,
           });
+          setTime(1500);
         }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [timer.running, timer.time, timer.work, timer.cycles]);
+  }, [timer.running, time, timer.work, timer.cycles]);
 
   return (
     <div className="">

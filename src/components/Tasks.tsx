@@ -4,18 +4,12 @@ import { useForm } from "react-hook-form";
 function Tasks() {
   interface ITodo {
     todo: string;
+    id: string;
   }
 
   const { register, handleSubmit } = useForm<ITodo>();
 
-  const [todos, setTodos] = React.useState<string[]>([
-    "Wassup",
-    "My dear",
-    "Friends",
-    "How",
-    "Are",
-    "You today?",
-  ]);
+  const [todos, setTodos] = React.useState<string[]>([]);
 
   const onSubmit = ({ todo }: ITodo) => {
     setTodos([...todos, todo]);
@@ -57,18 +51,48 @@ function Tasks() {
 
       {todos.map((sentence) => {
         return (
-          <div className="w-2/3 mx-auto flex justify-between m-5 px-2  py-2 border-b border-blue-600">
-            <input
-              className="outline-none ring-0 rounded focus:ring-2 ring-blue-300"
-              type="checkbox"
-              id="customvalue"
-              name="todo"
-              value="todo"
-            ></input>
-            <p className="font-roboto text-lg text-white  text-left ">
-              {sentence}
-            </p>
-            <div className="flex items-center pr-2">
+          <div className="w-2/3 mx-auto flex  m-5 px-2  py-2 border-b border-blue-600 justify-between">
+            <div className="flex">
+              {/* <input
+                className="outline-none ring-0 rounded focus:ring-2 ring-blue-300 mx-3"
+                type="checkbox"
+                id="customvalue"
+                name="todo"
+                value="todo"
+              ></input> */}
+
+              <div className="flex items-center ml-2 mr-4 ">
+                <input
+                  type="checkbox"
+                  id="A3-yes"
+                  name="A3-confirmation"
+                  value="yes"
+                  className="cursor-pointer opacity-0 absolute h-5 w-5"
+                />
+                <div className="bg-white border-2 rounded-md border-blue-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500">
+                  <svg
+                    className="fill-current hidden w-3 h-3 text-blue-600 pointer-events-none"
+                    version="1.1"
+                    viewBox="0 0 17 12"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g fill="none" fill-rule="evenodd">
+                      <g
+                        transform="translate(-9 -11)"
+                        fill="#1F73F1"
+                        fill-rule="nonzero"
+                      >
+                        <path d="m25.576 11.414c0.56558 0.55188 0.56558 1.4439 0 1.9961l-9.404 9.176c-0.28213 0.27529-0.65247 0.41385-1.0228 0.41385-0.37034 0-0.74068-0.13855-1.0228-0.41385l-4.7019-4.588c-0.56584-0.55188-0.56584-1.4442 0-1.9961 0.56558-0.55214 1.4798-0.55214 2.0456 0l3.679 3.5899 8.3812-8.1779c0.56558-0.55214 1.4798-0.55214 2.0456 0z" />
+                      </g>
+                    </g>
+                  </svg>
+                </div>
+                <label className="select-none"></label>
+              </div>
+
+              <p className="font-roboto text-lg text-white">{sentence}</p>
+            </div>
+            <div className="flex items-center pr-2 right-0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="10"
