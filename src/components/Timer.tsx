@@ -1,9 +1,6 @@
 import React from "react";
-
 // LOOK INTO USEREDUCER FOR THIS
-
 interface ITimer {
-  // time: number;
   running: boolean;
   minutes: string;
   seconds: string;
@@ -14,7 +11,6 @@ interface ITimer {
 function Timer() {
   const [time, setTime] = React.useState<number>(1500);
   const [timer, setTimer] = React.useState<ITimer>({
-    // time: 1500,
     running: false,
     minutes: "25",
     seconds: "0",
@@ -35,10 +31,8 @@ function Timer() {
 
       if (time === 0) {
         if (timer.cycles + 1 === 7) {
-          console.log("Oooh time for a long break");
           setTimer({
             running: false,
-            // time: 1200,
             minutes: "20",
             seconds: "0",
             work: false,
@@ -46,10 +40,8 @@ function Timer() {
           });
           setTime(1200);
         } else if (timer.work) {
-          console.log("time for a break");
           setTimer({
             running: false,
-            // time: 300,
             minutes: "5",
             seconds: "0",
             work: false,
@@ -57,10 +49,8 @@ function Timer() {
           });
           setTime(300);
         } else {
-          console.log("You should get back to work young man");
           setTimer({
             running: false,
-            // time: 1500,
             minutes: "25",
             seconds: "0",
             work: true,
@@ -74,14 +64,14 @@ function Timer() {
   }, [timer.running, time, timer.work, timer.cycles]);
 
   return (
-    <div className="">
+    <div>
       <div className="my-10">
         <p className="text-2xl font-trocchi text-blue-500 border-b-2 border-gray-200 text-center rounded pb-2">
           {timer.work ? "Time to get some work done!" : "Take a break!"}
         </p>
       </div>
 
-      <div className="">
+      <div>
         <div className="bg-blue-500 shadow-md  pt-8 pb-8 px-8  border-b-5 rounded-lg border-blue-700">
           <p className="text-white text-9xl font-bold font-roboto">
             {("0" + timer.minutes).slice(-2) +
@@ -91,8 +81,9 @@ function Timer() {
         </div>
         <div
           onClick={() => {
-            console.log("pressed");
-            setTimer({ ...timer, running: true });
+            timer.running
+              ? setTimer({ ...timer, running: false })
+              : setTimer({ ...timer, running: true });
           }}
           className="mt-10 cursor-pointer justify-center flex"
         >
