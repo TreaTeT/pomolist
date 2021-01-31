@@ -6,6 +6,8 @@ env
 .slug-post-clean
 # dependencies
 /node_modules
+
+/backend/env
 /backend/node_modules
 /.pnp
 .pnp.js
