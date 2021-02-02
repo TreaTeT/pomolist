@@ -14,6 +14,7 @@ router.route("/register").post((req, res) => {
   const tasks = 0;
   const cycles = 0;
   // create new user with given credentials
+
   const newUser = new User({
     name,
     email,
@@ -32,12 +33,6 @@ router.route("/register").post((req, res) => {
         .catch((user) => console.log(err));
     });
   });
-
-  //   // save the user in database
-  //   newUser
-  //     .save()
-  //     .then(() => res.json("User added!"))
-  //     .catch((err) => res.status(400).json("Error: " + err));
 });
 
 module.exports = router;

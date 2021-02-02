@@ -31,6 +31,10 @@ const userSchema = new Schema(
           unique: false,
           trim: true,
         },
+        _id: {
+          type: String,
+          unique: true,
+        },
       },
     ],
     cycles: {
