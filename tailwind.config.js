@@ -8,6 +8,8 @@ module.exports = {
         3: "3px",
         5: "5px",
         6: "6px",
+        10: "10px",
+        18: "18px",
       },
 
       fontFamily: {
