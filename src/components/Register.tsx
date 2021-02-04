@@ -1,9 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 function Register() {
   return (
     <div className="min-h-screen min-w-full bg-gradient-to-b from-blue-700 to-blue-500 flex items-center">
       <div className="bg-white flex-col sm:w-6/12 lg:w-3/12 mx-auto min-h-2/4 shadow-2xl rounded-sm ">
-        <div className="mt-8">
+        <div className="m-5">
+          <Link
+            className="outline-none  font-roboto text-xl text-blue-600 font-semibold"
+            to="/"
+          >
+            {"🡸"}
+          </Link>
+        </div>
+        <div className="mt-4">
           <p className="text-center font-trocchi leading-relaxed tracking-wider text-3xl text-blue-600">
             Registration
           </p>

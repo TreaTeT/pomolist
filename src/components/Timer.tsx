@@ -17,7 +17,7 @@ function Timer() {
     cycles: 0,
     work: true,
   });
-
+  // adding this comment
   React.useEffect(() => {
     if (timer.running) {
       time > 0 && setTimeout(() => setTime(time - 1), 1000);
