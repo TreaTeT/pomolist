@@ -32,7 +32,7 @@ function Tasks() {
         >
           <input
             ref={register({ required: true })}
-            className=" leading-relaxed rounded-xl pb-0.5 px-3 placeholder-gray-700 bg-white font-semibold ring-4 ring-blue-400 box-border shadow-inner text-gray-700 w-4/6 outline-none"
+            className="leading-relaxed py-1 px-2 placeholder-blue-500 bg-white font-semibold border-t-3 border-blue-600 shadow-xl rounded-b-sm text-blue-600 w-5/6 outline-none"
             type="text"
             name="todo"
             placeholder="add a new task"

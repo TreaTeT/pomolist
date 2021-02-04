@@ -12,7 +12,7 @@ function Register() {
         <form className="w-full">
           {/* USERNAME */}
           <div className="w-full">
-            <p className="w-3/4  tracking-wide  mx-auto text-blue-500 leading-relaxed font-trocchi text-lg  mt-10">
+            <p className="w-3/4  tracking-wide  mx-auto text-blue-500 leading-relaxed font-trocchi text-lg mt-10">
               username
             </p>
             <input
