@@ -6,44 +6,46 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
-      unique: false,
-      trim: true,
-      minLength: 3,
+      unique: true,
+      // required: true,
+      // unique: false,
+      // trim: true,
+      // minLength: 3,
     },
     email: {
       type: String,
-      required: true,
+      // required: true,
       unique: true,
-      trim: true,
+      // trim: true,
     },
     password: {
       type: String,
-      required: true,
-      unique: true,
-      trim: true,
+      // required: true,
+      // unique: true,
+      // trim: true,
     },
     unfinishedTasks: [
       {
         task: {
           type: String,
-          required: false,
-          unique: false,
-          trim: true,
+          // required: false,
+          // unique: false,
+          // trim: true,
         },
         _id: {
           type: String,
           unique: true,
+          sparse: true,
         },
       },
     ],
     cycles: {
       type: Number,
-      required: false,
+      // required: false,
     },
     tasks: {
       type: Number,
-      required: false,
+      // required: false,
     },
   },
   {

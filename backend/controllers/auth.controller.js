@@ -7,12 +7,12 @@ let jwt = require("jsonwebtoken");
 let bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
-  let tasks = [{ task: "this is a taks", _id: "dratjghfslfjh" }];
+  // let tasks = [{ task: "this is a taks", _id: "dratjghfslfjh" }];
   const user = new User({
     name: req.body.name,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
-    unfinishedTasks: tasks,
+    unfinishedTasks: [],
     cycles: 0,
     tasks: 0,
   });
@@ -20,6 +20,10 @@ exports.signup = (req, res) => {
   user.save((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
+      console.log("--------------------------------");
+      console.log(user);
+      console.log("--------------------------------");
+      console.log(err);
       return;
     }
     res.send({ message: "User was registered succesfully!" });

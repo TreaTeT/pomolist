@@ -1,19 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import AuthService from "../services/auth.service";
 
 interface IForm {
   name: string;
   email: string;
   password: string;
 }
+
+interface IResponse {
+  message: string;
+  successful: boolean;
+}
+
 function Register() {
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, reset } = useForm();
+  const [response, setResponse] = React.useState<IResponse | undefined>();
 
   const onSubmit = ({ name, email, password }: IForm) => {
-    console.log(`user: ${name}
-    email: ${email}
-    password: ${password}`);
+    AuthService.register(name, email, password).then(
+      (res) => {
+        console.log(res);
+        setResponse({ message: res.data.message, successful: true });
+      },
+      (error) => {
+        console.error(error);
+        // setResponse({ message: error.res.data.message, successful: false });
+      }
+    );
+    reset();
   };
 
   return (
@@ -39,15 +55,15 @@ function Register() {
               username
             </p>
             <input
-              type="username"
+              type="name"
               className="w-3/4 rounded-b mx-auto pl-3 py-2 font-semibold text-blue-600 placeholder-blue-400 outline-none flex mt-5 mb-2 border-t-2 shadow-md border-blue-500 border-opacity-80 "
               name="name"
-              placeholder="username"
+              placeholder="name"
               ref={register({ required: true, minLength: 4 })}
             />
             {errors.name && (
               <div className="text-red-500 font-sans font-semibold w-3/4 mx-auto text-xs text-opacity-70">
-                Username must at least 5 characters long!
+                {"Username must at least 5 characters long!"}
               </div>
             )}
           </div>

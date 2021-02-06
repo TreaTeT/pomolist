@@ -2,6 +2,7 @@
   "name": "pomolist",
   "version": "0.1.0",
   "private": true,
+  
   "dependencies": {
     "@craco/craco": "^6.0.0",
     "@tailwindcss/postcss7-compat": "^2.0.2",
@@ -63,4 +64,5 @@
     "@types/react-router-dom": "^5.1.7",
     "nodemon": "^2.0.7"
   }
+  
 }
