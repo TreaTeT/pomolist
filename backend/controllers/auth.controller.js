@@ -60,6 +60,8 @@ exports.signin = (req, res) => {
       name: user.name,
       email: user.email,
       accessToken: token,
+      cycles: user.cycles,
+      tasks: user.tasks,
     });
   });
 };
