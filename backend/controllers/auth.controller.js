@@ -30,7 +30,7 @@ exports.signup = (req, res) => {
   });
 };
 
-exports.singin = (req, res) => {
+exports.signin = (req, res) => {
   User.findOne({
     name: req.body.name,
   }).exec((err, user) => {

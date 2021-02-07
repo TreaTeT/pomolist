@@ -1,16 +1,39 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import AuthService from "../services/auth.service";
 
 interface IForm {
   name: string;
   password: string;
 }
 
-function Register() {
+interface IResponse {
+  message: string;
+  successful: boolean;
+}
+
+function Login() {
+  let history = useHistory();
+
   const { register, handleSubmit, errors } = useForm();
+  const [response, setResponse] = React.useState<IResponse | undefined>();
 
   const onSubmit = ({ name, password }: IForm) => {
+    AuthService.login(name, password).then(
+      () => {
+        console.log("logged in");
+        history.push("/");
+        window.location.reload();
+      },
+      (error) => {
+        setResponse({
+          message: error?.response?.data?.message,
+          successful: false,
+        });
+        console.error(error);
+      }
+    );
     console.log(`user: ${name} , password: ${password}`);
   };
 
@@ -32,6 +55,15 @@ function Register() {
         </div>
 
         <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+          {response ? (
+            <div className="mx-auto w-3/4">
+              <p className="text-center text-red-400 font-bold mt-5">
+                {response.message}
+              </p>
+            </div>
+          ) : (
+            ""
+          )}
           {/* USERNAME */}
           <div className="w-full">
             <p className="w-3/4  tracking-wide  mx-auto text-blue-500 leading-relaxed font-trocchi text-lg mt-10">
@@ -72,7 +104,7 @@ function Register() {
 
           <button
             type="submit"
-            className="flex mx-auto outline-none text-white  bg-blue-500 py-2 px-3 rounded border-b-3  border-blue-700 mt-5 font-semibold mb-10 hover:bg-blue-700"
+            className="flex mx-auto outline-none text-white  bg-blue-500 py-2 px-3 rounded border-b-3  border-blue-700 mt-10 font-semibold mb-10 hover:bg-blue-700"
           >
             login
           </button>
@@ -81,4 +113,4 @@ function Register() {
     </div>
   );
 }
-export default Register;
+export default Login;

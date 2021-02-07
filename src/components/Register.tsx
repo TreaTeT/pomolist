@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import AuthService from "../services/auth.service";
 
@@ -17,16 +17,22 @@ interface IResponse {
 function Register() {
   const { register, handleSubmit, errors, reset } = useForm();
   const [response, setResponse] = React.useState<IResponse | undefined>();
+  let history = useHistory();
 
   const onSubmit = ({ name, email, password }: IForm) => {
     AuthService.register(name, email, password).then(
       (res) => {
         console.log(res);
         setResponse({ message: res.data.message, successful: true });
+        history.push("/login");
+        window.location.reload();
       },
       (error) => {
         console.error(error);
-        // setResponse({ message: error.res.data.message, successful: false });
+        setResponse({
+          message: error?.response?.data?.message,
+          successful: false,
+        });
       }
     );
     reset();
@@ -49,6 +55,15 @@ function Register() {
           </p>
         </div>
         <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+          {response ? (
+            <div className="mx-auto w-3/4">
+              <p className="text-center text-red-400 font-bold p-2">
+                {response.message}
+              </p>
+            </div>
+          ) : (
+            ""
+          )}
           {/* USERNAME */}
           <div className="w-full">
             <p className="w-3/4  tracking-wide  mx-auto text-blue-500 leading-relaxed font-trocchi text-lg  mt-10">
@@ -100,7 +115,7 @@ function Register() {
             />
             {errors.password && (
               <div className=" w-3/4 mx-auto text-red-500 font-sans font-semibold text-xs text-opacity-70">
-                Enter a valid title!
+                Password must be at least 8 characters long!
               </div>
             )}
           </div>
