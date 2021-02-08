@@ -13,6 +13,7 @@ interface IUser {
 
 function Home() {
   const [user, setUser] = React.useState<IUser | undefined>();
+
   React.useEffect(() => {
     console.log(AuthService.getCurrentUser());
     if (AuthService.getCurrentUser()) {
@@ -39,7 +40,7 @@ function Home() {
               <p className="text-center font-semibold text-xl text-white m-2">
                 {user.name}
               </p>
-              <div className="flex">
+              <div className="flex justify-center">
                 <div className="mx-10 mt-2 mb-5 text-center">
                   <p className="font-semibold text-white border-b border-white">
                     Session
@@ -55,8 +56,18 @@ function Home() {
                   <p className="pt-1 text-gray-200">{`Tasks: ${user.tasks}`}</p>
                 </div>
               </div>
+              <div className="flex-col justify-center ">
+                <div className="flex justify-center items-center border-b border-blue-400 py-1">
+                  <p className="px-1 text-md font-semibold text-gray-200">{`That sums up to total of `}</p>
+                  <p className="px-1 text-lg font-bold text-white font-trocchi pb-1">{` ${Math.round(
+                    (user.cycles * 25) / 60
+                  )} `}</p>
+                  <p className="px-1 text-md font-semibold text-gray-200">{` hours of productive time!`}</p>
+                </div>
+              </div>
+
               <p
-                className="cursor-pointer text-center text-blue-200 hover:text-blue-800"
+                className="cursor-pointer text-center text-blue-200 hover:text-blue-800 font-semibold my-3"
                 onClick={() => {
                   AuthService.logout();
                   window.location.reload();
