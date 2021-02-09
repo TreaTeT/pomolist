@@ -24,7 +24,7 @@ function Tasks() {
   };
 
   return (
-    <div className="flex-col h-3/5 overflow-y-auto ">
+    <div className="flex-col h-3/4 overflow-y-auto ">
       <div className="flex justify-between w-2/3 items-center mx-auto pb-10 mt-2">
         <form
           onSubmit={handleSubmit(onSubmit)}

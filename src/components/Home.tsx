@@ -34,40 +34,18 @@ function Home() {
         </p>
         <Tasks />
 
-        <div className="relative flex justify-center">
+        <div className=" flex justify-center">
           {user ? (
             <div>
-              <p className="text-center font-semibold text-xl text-white m-2">
+              <Link
+                to="/profile"
+                className="text-center justify-center font-semibold text-2xl text-gray-200 outline-none hover:text-white "
+              >
                 {user.name}
-              </p>
-              <div className="flex justify-center">
-                <div className="mx-10 mt-2 mb-5 text-center">
-                  <p className="font-semibold text-white border-b border-white">
-                    Session
-                  </p>
-                  <p className="pt-1 text-gray-200">{`Cycles: ${0}`}</p>
-                  <p className="pt-1 text-gray-200">{`Tasks: ${0}`}</p>
-                </div>
-                <div className="mx-10 mt-2 mb-5 text-center">
-                  <p className="font-semibold text-white border-b border-white">
-                    Total
-                  </p>
-                  <p className="pt-1 text-gray-200">{`Cycles: ${user.cycles}`}</p>
-                  <p className="pt-1 text-gray-200">{`Tasks: ${user.tasks}`}</p>
-                </div>
-              </div>
-              <div className="flex-col justify-center ">
-                <div className="flex justify-center items-center border-b border-blue-400 py-1">
-                  <p className="px-1 text-md font-semibold text-gray-200">{`That sums up to total of `}</p>
-                  <p className="px-1 text-lg font-bold text-white font-trocchi pb-1">{` ${Math.round(
-                    (user.cycles * 25) / 60
-                  )} `}</p>
-                  <p className="px-1 text-md font-semibold text-gray-200">{` hours of productive time!`}</p>
-                </div>
-              </div>
+              </Link>
 
               <p
-                className="cursor-pointer text-center text-blue-200 hover:text-blue-800 font-semibold my-3"
+                className="cursor-pointer text-center text-blue-200 hover:text-blue-800 font-semibold my-2"
                 onClick={() => {
                   AuthService.logout();
                   window.location.reload();
