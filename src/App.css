@@ -5,6 +5,15 @@
   text-align: center;
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

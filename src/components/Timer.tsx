@@ -65,7 +65,7 @@ function Timer() {
 
   return (
     <div>
-      <div className="my-10">
+      <div className="mb-10 mt-24">
         <p className="text-2xl font-trocchi text-blue-500 border-b-2 border-gray-200 text-center rounded pb-2">
           {timer.work ? "Time to get some work done!" : "Take a break!"}
         </p>
