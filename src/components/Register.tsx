@@ -40,13 +40,13 @@ function Register() {
 
   return (
     <div className="min-h-screen min-w-full bg-gradient-to-b from-blue-700 to-blue-500 flex items-center">
-      <div className="bg-white flex-col sm:w-6/12 lg:w-3/12 mx-auto min-h-2/4 shadow-2xl rounded-sm ">
+      <div className="bg-white flex-col sm:w-6/12 lg:w-3/12 mx-auto min-h-2/4 shadow-2xl ring-8 ring-blue-300 ring-opacity-50 ">
         <div className="m-5">
           <Link
-            className="outline-none  font-roboto text-xl text-blue-600 font-semibold"
+            className="outline-none  font-roboto text-3xl text-blue-600 font-semibold"
             to="/"
           >
-            {"🡸"}
+            {"⇠"}
           </Link>
         </div>
         <div className="mt-4">
@@ -66,7 +66,7 @@ function Register() {
           )}
           {/* USERNAME */}
           <div className="w-full">
-            <p className="w-3/4  tracking-wide  mx-auto text-blue-500 leading-relaxed font-trocchi text-lg  mt-10">
+            <p className="w-3/4 italic tracking-wide  mx-auto text-blue-500 leading-relaxed font-trocchi text-lg  mt-10">
               username
             </p>
             <input
@@ -85,7 +85,7 @@ function Register() {
 
           {/* EMAIL */}
           <div className="w-full">
-            <p className="w-3/4 tracking-wide mx-auto text-blue-500 text-underline leading-relaxed font-trocchi text-lg mt-4">
+            <p className="w-3/4 italic tracking-wide mx-auto text-blue-500 text-underline leading-relaxed font-trocchi text-lg mt-4">
               e-mail
             </p>
             <input
@@ -103,7 +103,7 @@ function Register() {
           </div>
           {/* PASSWORD */}
           <div className="w-full ">
-            <p className="w-3/4 mx-auto  tracking-widetext-blue-500 leading-relaxed font-trocchi text-blue-500 text-lg  my-5">
+            <p className="w-3/4 mx-auto italic  tracking-widetext-blue-500 leading-relaxed font-trocchi text-blue-500 text-lg  my-5">
               password
             </p>
             <input

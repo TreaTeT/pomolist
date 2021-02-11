@@ -20,15 +20,15 @@ function Profile() {
   }, []);
   return (
     <div className="min-h-screen min-w-full bg-gradient-to-b from-blue-700 to-blue-500 flex items-center">
-      <div className="bg-white flex-col sm:w-6/12 lg:w-3/12 mx-auto min-h-2/4 shadow-2xl rounded-sm">
+      <div className="bg-white flex-col sm:w-6/12 lg:w-3/12 mx-auto shadow-2xl ring-8 ring-blue-300 ring-opacity-50">
         {user ? (
           <div>
             <div className="p-2">
               <Link
-                className="outline-none font-roboto text-xl text-blue-600 font-semibold"
+                className="outline-none font-roboto text-3xl text-blue-600 font-semibold"
                 to="/"
               >
-                {"🡸"}
+                {"⇠"}
               </Link>
             </div>
             <p className="text-center font-semibold text-3xl text-blue-500 m-5">
@@ -59,7 +59,7 @@ function Profile() {
                 <p className="px-1 text-md font-semibold text-blue-600">{` hours of productive time!`}</p>
               </div>
             </div>
-            <p className="text-center text-xl font-trocchi text-green-400 m-3">
+            <p className="text-center text-3xl font-trocchi text-green-400 m-5">
               Great Work!
             </p>
           </div>

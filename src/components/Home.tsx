@@ -25,9 +25,10 @@ function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen flex-col overflow-y-hidden">
+    <div className="min-h-screen flex-col overflow-y-hidden ">
       <div className="flex w-full justify-center items-center flex-col min-h-screen">
         <Timer />
+
         <p
           onClick={() => {
             if (taskView.current) {
@@ -38,16 +39,13 @@ function Home() {
               });
             }
           }}
-          className="text-blue-600 text-3xl absolute bottom-5 cursor-pointer"
+          className="text-blue-600 text-3xl absolute bottom-5 cursor-pointer "
         >
           ⇣
         </p>
       </div>
-      <div
-        ref={taskView}
-        className="w-full min-h-screen lg:w-7/12 mx-auto  mt-20"
-      >
-        <div className="bg-blue-500 rounded-b-2xl border-b-8 border-blue-800">
+      <div ref={taskView} className="w-full min-h-screen  mx-auto mt-20 ">
+        <div className=" w-full mx-auto bg-blue-600 shadow-xl items-center">
           <p className="text-white font-medium tracking-wide font-trocchi text-4xl flex justify-center p-10">
             Tasks
           </p>

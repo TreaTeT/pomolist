@@ -65,15 +65,15 @@ function Timer() {
 
   return (
     <div>
-      <div className="mb-10 mt-24">
-        <p className="text-2xl font-trocchi text-blue-500 border-b-2 border-gray-200 text-center rounded pb-2">
+      <div className="mb-12 mt-24">
+        <p className="text-3xl font-trocchi text-blue-500 border-b-2 border-gray-200 text-center  rounded pb-2">
           {timer.work ? "Time to get some work done!" : "Take a break!"}
         </p>
       </div>
 
       <div>
-        <div className="bg-blue-500 shadow-md  pt-8 pb-8 px-8  border-b-5 rounded-lg border-blue-700">
-          <p className="text-white text-9xl font-bold font-roboto">
+        <div className="bg-blue-500 shadow-md  px-8  border-b-5 rounded-lg border-blue-700">
+          <p className="text-white text-11xl font-bold font-roboto">
             {("0" + timer.minutes).slice(-2) +
               ":" +
               ("0" + timer.seconds).slice(-2)}

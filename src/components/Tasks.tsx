@@ -26,14 +26,14 @@ function Tasks() {
   return (
     <div className="flex-col w-full mt-10">
       <div className="w-full">
-        <div className="flex justify-between w-6/12 items-center mx-auto pb-10 mt-2 ">
+        <div className="flex justify-between lg:w-4/12 w-8/12 items-center mx-auto pb-10 mt-2 ">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex justify-between w-full items-center"
           >
             <input
               ref={register({ required: true })}
-              className="leading-relaxed py-1 px-2 placeholder-blue-500 bg-white font-semibold border-t-3 border-blue-600 shadow-xl rounded-b-sm text-blue-600 w-5/6 outline-none my-5"
+              className="leading-relaxed py-2 px-2 placeholder-blue-500 bg-white font-semibold border-t-3 border-blue-500 shadow-xl rounded-b-sm text-blue-600 w-5/6 outline-none my-8"
               type="text"
               name="todo"
               placeholder="add a new task"
@@ -62,7 +62,7 @@ function Tasks() {
           return (
             <div
               key={todo.id}
-              className="w-2/3 mx-auto flex  m-5  py-2 border-b border-blue-600 justify-between"
+              className="lg:w-4/12 w-8/12 mx-auto flex  m-5  py-2 border-b border-blue-600 justify-between"
             >
               <div className="flex">
                 <div className="flex items-center  mr-4 ">
