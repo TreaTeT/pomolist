@@ -39,17 +39,17 @@ function Login() {
 
   return (
     <div className="min-h-screen min-w-full bg-gradient-to-b from-blue-700 to-blue-500 flex items-center">
-      <div className="bg-white flex-col sm:w-6/12 lg:w-3/12 mx-auto min-h-2/4 shadow-2xl ring-8 ring-blue-300 ring-opacity-50">
+      <div className="bg-white flex-col w-11/12 sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-3/12 mx-auto shadow-2xl ring-10 ring-blue-300 ring-opacity-50">
         <div className="m-5">
           <Link
-            className="outline-none font-roboto text-3xl text-blue-600 font-semibold"
+            className="outline-none font-roboto text-3xl text-blue-600 font-semibold transition duration-500 opacity-60 hover:opacity-100"
             to="/"
           >
             {"⇠"}
           </Link>
         </div>
-        <div className="mt-8">
-          <p className="text-center font-trocchi leading-relaxed tracking-wider text-3xl text-blue-600">
+        <div className="mx-auto">
+          <p className="text-center font-semibold mb-16 font-roboto underline leading-relaxed tracking-wide text-5xl text-blue-600 ">
             Login
           </p>
         </div>
@@ -65,15 +65,14 @@ function Login() {
             ""
           )}
           {/* USERNAME */}
-          <div className="w-full">
-            <p className="w-3/4  tracking-wide  italic mx-auto text-blue-500 leading-relaxed font-trocchi text-lg mt-10">
+          <div className="w-full pb-3">
+            <p className="w-3/4  tracking-wide mx-auto text-blue-600 leading-relaxed font-roboto text-lg ">
               username
             </p>
             <input
               type="username"
-              className="w-3/4 rounded-b mx-auto pl-3 py-2 font-semibold text-blue-600 placeholder-blue-400 outline-none flex my-5 border-t-3 shadow-md border-blue-500 border-opacity-80 "
+              className="w-3/4 rounded-b mx-auto pl-3 py-2 font-semibold text-blue-600 outline-none flex mb-5 border-t-3 shadow-md border-blue-600 border-opacity-80 "
               name="name"
-              placeholder="username"
               ref={register({ required: true, minLength: 5 })}
             />
             {errors.name && (
@@ -85,14 +84,13 @@ function Login() {
 
           {/* PASSWORD */}
           <div className="w-full">
-            <p className="w-3/4 mx-auto italic tracking-widetext-blue-500 leading-relaxed font-trocchi text-blue-500 text-lg my-5">
+            <p className="w-3/4 mx-auto  tracking-widetext-blue-500 leading-relaxed font-roboto text-blue-600 text-lg mb-1">
               password
             </p>
             <input
               type="password"
-              className="w-3/4 rounded-b shadow-md mx-auto pl-3 py-2  mb-5 font-semibold text-blue-600 placeholder-blue-400  outline-none flex border-t-3 border-blue-500 border-opacity-80"
+              className="w-3/4 rounded-b shadow-md mx-auto pl-3 py-2  font-semibold text-blue-600 placeholder-blue-400  outline-none flex border-t-3 border-blue-600 border-opacity-80"
               name="password"
-              placeholder="verystrongsecurepasswordplease"
               ref={register({ required: true, minLength: 8 })}
             />
             {errors.password && (
@@ -104,7 +102,7 @@ function Login() {
 
           <button
             type="submit"
-            className="flex mx-auto outline-none text-white  bg-blue-500 py-2 px-3 rounded border-b-3  border-blue-700 mt-10 font-semibold mb-10 hover:text-blue-200"
+            className="flex mx-auto outline-none shadow text-xl  hover:bg-blue-600 py-2 hover:text-white  px-4 my-12 font-semibold transition duration-700 hover:border-blue-600 border bg-gray-50   border-gray-100 text-blue-600"
           >
             login
           </button>

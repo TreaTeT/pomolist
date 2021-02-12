@@ -3,6 +3,10 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      ringWidth: {
+        10: "10px",
+        12: "12px",
+      },
       fontSize: {
         "10xl": "9rem",
         "11xl": "10rem",

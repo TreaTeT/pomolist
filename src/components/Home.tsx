@@ -58,7 +58,7 @@ function Home() {
             <div className="fixed flex py-5 items-center">
               <Link
                 to="/profile"
-                className="mx-1 flex outline-none tracking-wide bg-blue-500 rounded border-b-2 box-content border-blue-800  py-2  text-white hover:text-blue-100 px-2 font-semibold"
+                className="mx-1 flex outline-none tracking-wide bg-blue-500 rounded border-b-2 box-content border-blue-800  py-2  text-white hover:bg-blue-400 hover:border-blue-600 px-2 font-semibold"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,7 @@ function Home() {
               </Link>
 
               <p
-                className="mx-1 cursor-pointer flex outline-none tracking-wide bg-blue-500 rounded border-b-2 box-content border-blue-800 pb-2 pt-1  text-white hover:text-blue-100 px-2 font-semibold"
+                className="mx-1 flex outline-none tracking-wide bg-blue-500 rounded border-b-2 box-content border-blue-700 pb-1 pt-1.5 transition duration-500   text-white hover:bg-blue-400 hover:border-blue-600  px-2 font-roboto"
                 onClick={() => {
                   AuthService.logout();
                   window.location.reload();
@@ -84,14 +84,14 @@ function Home() {
           ) : (
             <div className="fixed flex py-5 items-center">
               <Link
-                className="mx-1 flex outline-none tracking-wide bg-blue-500 rounded border-b-2 box-content border-blue-800 pb-2 pt-1  text-white hover:text-blue-100 px-2 font-semibold"
+                className="mx-1 flex outline-none tracking-wide bg-blue-500 rounded border-b-2 box-content border-blue-700 pb-1 pt-1.5 transition duration-500   text-white hover:bg-blue-400 hover:border-blue-600  px-2 font-roboto"
                 to="/login"
               >
                 login{" "}
               </Link>
 
               <Link
-                className="mx-1 flex outline-none tracking-wide bg-blue-500 rounded border-b-2 box-content border-blue-800 pb-2 pt-1  text-white hover:text-blue-100 px-2 font-semibold"
+                className="mx-1 flex outline-none tracking-wide bg-blue-500 rounded border-b-2 box-content border-blue-700 pb-1 pt-1.5 transition duration-500   text-white hover:bg-blue-400 hover:border-blue-600 px-2 font-roboto"
                 to="/register"
               >
                 register
