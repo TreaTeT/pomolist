@@ -1,13 +1,12 @@
 const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.user;
-const Role = db.role;
 
 let jwt = require("jsonwebtoken");
 let bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
-  // let tasks = [{ task: "this is a taks", _id: "dratjghfslfjh" }];
+  // let tasks = [{ task: "this is a task", _id: "dratjghfslfjh" }];
   const user = new User({
     name: req.body.name,
     email: req.body.email,

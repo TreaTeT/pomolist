@@ -10,6 +10,11 @@ module.exports = function (app) {
     next();
   });
 
-  app.get("/api/test/all", controller.allAccess);
-  app.get("/api/test/user", [authJwt.verifyToken], controller.userBoard);
+  app.get("/api/users/all", controller.allAccess);
+  app.get("/api/users/user", [authJwt.verifyToken], controller.userBoard);
+  app.put("/api/users/update_stats/:id", controller.userStatsUpdate);
+  app.put(
+    "/api/users/save_unfinished_tasks/:id",
+    controller.saveUnfinishedTasks
+  );
 };

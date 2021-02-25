@@ -72,7 +72,7 @@ function Home() {
               </Link>
 
               <p
-                className="mx-1 flex outline-none tracking-wide bg-blue-500 rounded border-b-2 box-content border-blue-700 pb-1 pt-1.5 transition duration-500   text-white hover:bg-blue-400 hover:border-blue-600  px-2 font-roboto"
+                className="mx-1 flex outline-none tracking-wide bg-blue-500 rounded border-b-2 box-content border-blue-700 pb-1 pt-1.5 transition duration-500 text-white hover:bg-blue-400 hover:border-blue-600  px-2 font-roboto cursor-pointer"
                 onClick={() => {
                   AuthService.logout();
                   window.location.reload();
@@ -103,5 +103,4 @@ function Home() {
     </div>
   );
 }
-
 export default Home;

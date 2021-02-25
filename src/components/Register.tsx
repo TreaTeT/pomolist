@@ -40,7 +40,7 @@ function Register() {
 
   return (
     <div className="min-h-screen min-w-full bg-gradient-to-b from-blue-700 to-blue-500 flex items-center">
-      <div className="bg-white flex-col w-11/12 sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-3/12 mx-auto min-h-2/4 shadow-2xl ring-8 ring-blue-300 ring-opacity-50 ">
+      <div className="bg-white flex-col w-11/12 sm:w-7/12 md:w-6/12 lg:w-5/12 xl:w-3/12 mx-auto min-h-2/4 shadow-2xl ring-10 ring-blue-300 ring-opacity-50 ">
         <div className="m-5">
           <Link
             className="outline-none font-roboto text-3xl text-blue-600 font-semibold transition duration-500 opacity-60 hover:opacity-100"

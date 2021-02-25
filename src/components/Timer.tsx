@@ -7,7 +7,6 @@ interface ITimer {
   cycles: number;
   work: boolean;
 }
-
 function Timer() {
   const [time, setTime] = React.useState<number>(1500);
   const [timer, setTimer] = React.useState<ITimer>({
