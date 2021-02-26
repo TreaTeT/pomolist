@@ -1,6 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
+import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 
 function Tasks() {
   interface ITodo {
@@ -10,7 +12,6 @@ function Tasks() {
   }
 
   const { register, handleSubmit, reset } = useForm<ITodo>();
-
   const [todos, setTodos] = React.useState<ITodo[]>([]);
 
   const onSubmit = ({ todo }: ITodo) => {
@@ -21,6 +22,23 @@ function Tasks() {
 
   const handleDelete = (id: string): void => {
     setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const updateTasks = () => {
+    if (AuthService.getCurrentUser()) {
+      let { id, cycles, tasks } = AuthService.getCurrentUser();
+      let user = AuthService.getCurrentUser();
+      user["tasks"] = tasks + 1;
+      console.log(user);
+      UserService.updateStats(id, tasks + 1, cycles)
+        .then((res) => {
+          localStorage.setItem("user", JSON.stringify(user));
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   };
 
   return (
@@ -78,6 +96,7 @@ function Tasks() {
                         checked: !newArr[index].checked,
                       };
                       setTodos(newArr);
+                      updateTasks();
                     }}
                   />
                   <div className="bg-white border-2 rounded-md border-blue-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500">

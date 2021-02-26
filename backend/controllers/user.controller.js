@@ -1,7 +1,7 @@
 const db = require("../models");
 const User = db.user;
 
-exports.userStatsUpdate = (req, res, next) => {
+exports.userStatsUpdate = (req, res) => {
   User.findByIdAndUpdate(
     req.params.id,
     {
@@ -21,7 +21,7 @@ exports.userStatsUpdate = (req, res, next) => {
     })
     .catch((err) => {
       res.stats(500).send({
-        message: "Error updating user with id= " + req.body.iq,
+        message: "Error updating user with id= " + req.body.id,
       });
     });
 };

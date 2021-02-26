@@ -16,7 +16,7 @@ function Home() {
   const taskView = createRef<HTMLDivElement>();
 
   React.useEffect(() => {
-    console.log(AuthService.getCurrentUser());
+    // console.log(AuthService.getCurrentUser());
     if (AuthService.getCurrentUser()) {
       setUser(AuthService.getCurrentUser());
     } else {

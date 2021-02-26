@@ -1,4 +1,6 @@
 import React from "react";
+import UserService from "../services/user.service";
+import AuthService from "../services/auth.service";
 // LOOK INTO USEREDUCER FOR THIS
 interface ITimer {
   running: boolean;
@@ -16,10 +18,10 @@ function Timer() {
     cycles: 0,
     work: true,
   });
-  // adding this comment
+
   React.useEffect(() => {
     if (timer.running) {
-      time > 0 && setTimeout(() => setTime(time - 1), 1000);
+      time > 0 && setTimeout(() => setTime(time - 1), 10);
       let calc_minutes = Math.floor(time / 60);
       let calc_seconds = time - calc_minutes * 60;
       setTimer({
@@ -38,6 +40,7 @@ function Timer() {
             cycles: 0,
           });
           setTime(1200);
+          updateCycles();
         } else if (timer.work) {
           setTimer({
             running: false,
@@ -46,6 +49,7 @@ function Timer() {
             work: false,
             cycles: timer.cycles + 1,
           });
+          updateCycles();
           setTime(300);
         } else {
           setTimer({
@@ -61,6 +65,23 @@ function Timer() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timer.running, time, timer.work, timer.cycles]);
+
+  const updateCycles = () => {
+    if (AuthService.getCurrentUser()) {
+      let { id, cycles, tasks } = AuthService.getCurrentUser();
+      let user = AuthService.getCurrentUser();
+      user["cycles"] = cycles + 1;
+      console.log(user);
+      UserService.updateStats(id, tasks, cycles + 1)
+        .then((res) => {
+          localStorage.setItem("user", JSON.stringify(user));
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
 
   return (
     <div>

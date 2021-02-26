@@ -5,13 +5,15 @@ const API_URL = "http://localhost:5000/api/users/";
 
 class UserService {
   updateStats(id, tasks, cycles) {
+    console.log(`number of tasks is ${tasks}`);
+    console.log(`number of cycles is ${cycles}`);
     return axios
       .put(API_URL + "update_stats/" + id, {
-        tasks,
         cycles,
+        tasks,
       })
       .then((response) => {
-        console.log(response.data);
+        return response.data;
       });
   }
 
