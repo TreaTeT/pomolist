@@ -6,31 +6,37 @@ import UserService from "../services/user.service";
 
 function Tasks() {
   interface ITodo {
-    todo: string;
-    id: string;
+    task: string;
+    _id: string;
     checked: boolean;
   }
 
   const { register, handleSubmit, reset } = useForm<ITodo>();
   const [todos, setTodos] = React.useState<ITodo[]>([]);
+  // can't tell if it's worth to save these in db too
+  // might just save them into the localstorage
+  React.useEffect(() => {
+    console.log(todos);
+    UserService.saveUnfinishedTasks(AuthService.getCurrentUser().id, todos);
+  }, [todos]);
 
-  const onSubmit = ({ todo }: ITodo) => {
+  const onSubmit = ({ task }: ITodo) => {
     let id = uuidv4();
-    setTodos([...todos, { todo: todo, id: id, checked: false }]);
+    setTodos([...todos, { task: task, _id: id, checked: false }]);
     reset();
   };
 
   const handleDelete = (id: string): void => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    setTodos(todos.filter((todo) => todo._id !== id));
   };
 
-  const updateTasks = () => {
+  const updateTasks = (t = 1) => {
     if (AuthService.getCurrentUser()) {
       let { id, cycles, tasks } = AuthService.getCurrentUser();
       let user = AuthService.getCurrentUser();
       user["tasks"] = tasks + 1;
       console.log(user);
-      UserService.updateStats(id, tasks + 1, cycles)
+      UserService.updateStats(id, tasks + t, cycles)
         .then((res) => {
           localStorage.setItem("user", JSON.stringify(user));
           console.log(res);
@@ -53,7 +59,7 @@ function Tasks() {
               ref={register({ required: true })}
               className="leading-relaxed py-2 px-2 placeholder-blue-500 bg-white font-semibold border-t-3 border-blue-500 shadow-xl rounded-b-sm text-blue-600 w-5/6 outline-none my-8"
               type="text"
-              name="todo"
+              name="task"
               placeholder="add a new task"
             ></input>
 
@@ -79,7 +85,7 @@ function Tasks() {
         {todos.map((todo, index) => {
           return (
             <div
-              key={todo.id}
+              key={todo._id}
               className="lg:w-4/12 w-8/12 mx-auto flex  m-5  py-2 border-b border-blue-600 justify-between"
             >
               <div className="flex">
@@ -96,7 +102,11 @@ function Tasks() {
                         checked: !newArr[index].checked,
                       };
                       setTodos(newArr);
-                      updateTasks();
+                      if (newArr[index].checked) {
+                        updateTasks();
+                      } else {
+                        updateTasks(-1);
+                      }
                     }}
                   />
                   <div className="bg-white border-2 rounded-md border-blue-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500">
@@ -125,12 +135,12 @@ function Tasks() {
                     todo.checked ? "line-through" : "no-underline"
                   }`}
                 >
-                  {todo.todo}
+                  {todo.task}
                 </p>
               </div>
               <div className="flex items-center pr-2">
                 <svg
-                  onClick={() => handleDelete(todo.id)}
+                  onClick={() => handleDelete(todo._id)}
                   xmlns="http://www.w3.org/2000/svg"
                   width="10"
                   height="10"

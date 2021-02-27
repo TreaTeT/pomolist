@@ -18,6 +18,7 @@ class UserService {
   }
 
   saveUnfinishedTasks(id, unfinishedTasks) {
+    console.log(unfinishedTasks);
     return axios
       .put(API_URL + "save_unfinished_tasks/" + id, {
         unfinishedTasks, // task is {tasks: "some task", _id: "id of the task"}

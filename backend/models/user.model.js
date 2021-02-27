@@ -35,6 +35,9 @@ const userSchema = new Schema(
           unique: true,
           sparse: true,
         },
+        checked: {
+          type: Boolean,
+        },
       },
     ],
     cycles: {

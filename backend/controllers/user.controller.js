@@ -20,7 +20,7 @@ exports.userStatsUpdate = (req, res) => {
       }
     })
     .catch((err) => {
-      res.stats(500).send({
+      res.status(500).send({
         message: "Error updating user with id= " + req.body.id,
       });
     });
