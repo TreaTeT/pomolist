@@ -1,6 +1,26 @@
 const db = require("../models");
 const User = db.user;
 
+exports.getUserTasks = (req, res) => {
+  User.findOne({
+    _id: req.params.id,
+  }).exec((err, user) => {
+    if (err) {
+      return res.status(500).send({ message: err });
+    }
+
+    if (!user) {
+      return res.status(404).send({ message: "User Not Found!" });
+    }
+
+    console.log(user.unfinishedTasks);
+
+    res.status(200).send({
+      unfinishedTasks: user.unfinishedTasks,
+    });
+  });
+};
+
 exports.userStatsUpdate = (req, res) => {
   User.findByIdAndUpdate(
     req.params.id,
@@ -27,6 +47,7 @@ exports.userStatsUpdate = (req, res) => {
 };
 
 exports.saveUnfinishedTasks = (req, res) => {
+  console.log("running save unfinishedTasks");
   User.findByIdAndUpdate(
     req.params.id,
     {

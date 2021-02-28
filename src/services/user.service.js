@@ -4,6 +4,17 @@ import authHeader from "./auth.header";
 const API_URL = "http://localhost:5000/api/users/";
 
 class UserService {
+  getUserTasks(id) {
+    return axios
+      .get(API_URL + "get_user_tasks/" + id)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
   updateStats(id, tasks, cycles) {
     console.log(`number of tasks is ${tasks}`);
     console.log(`number of cycles is ${cycles}`);

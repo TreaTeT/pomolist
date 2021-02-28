@@ -17,4 +17,5 @@ module.exports = function (app) {
     "/api/users/save_unfinished_tasks/:id",
     controller.saveUnfinishedTasks
   );
+  app.get("/api/users/get_user_tasks/:id", controller.getUserTasks);
 };

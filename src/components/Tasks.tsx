@@ -13,21 +13,33 @@ function Tasks() {
 
   const { register, handleSubmit, reset } = useForm<ITodo>();
   const [todos, setTodos] = React.useState<ITodo[]>([]);
-  // can't tell if it's worth to save these in db too
-  // might just save them into the localstorage
+
   React.useEffect(() => {
-    console.log(todos);
-    UserService.saveUnfinishedTasks(AuthService.getCurrentUser().id, todos);
-  }, [todos]);
+    UserService.getUserTasks(AuthService.getCurrentUser().id)
+      .then((res) => {
+        setTodos(res.unfinishedTasks);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   const onSubmit = ({ task }: ITodo) => {
     let id = uuidv4();
     setTodos([...todos, { task: task, _id: id, checked: false }]);
+    UserService.saveUnfinishedTasks(AuthService.getCurrentUser().id, [
+      ...todos,
+      { task: task, _id: id, checked: false },
+    ]);
     reset();
   };
 
   const handleDelete = (id: string): void => {
     setTodos(todos.filter((todo) => todo._id !== id));
+    UserService.saveUnfinishedTasks(
+      AuthService.getCurrentUser().id,
+      todos.filter((todo) => todo._id !== id)
+    );
   };
 
   const updateTasks = (t = 1) => {

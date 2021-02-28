@@ -21,7 +21,7 @@ function Timer() {
 
   React.useEffect(() => {
     if (timer.running) {
-      time > 0 && setTimeout(() => setTime(time - 1), 10);
+      time > 0 && setTimeout(() => setTime(time - 1), 1000);
       let calc_minutes = Math.floor(time / 60);
       let calc_seconds = time - calc_minutes * 60;
       setTimer({
