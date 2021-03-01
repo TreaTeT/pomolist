@@ -15,13 +15,15 @@ function Tasks() {
   const [todos, setTodos] = React.useState<ITodo[]>([]);
 
   React.useEffect(() => {
-    UserService.getUserTasks(AuthService.getCurrentUser().id)
-      .then((res) => {
-        setTodos(res.unfinishedTasks);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    if (AuthService.getCurrentUser()) {
+      UserService.getUserTasks(AuthService.getCurrentUser().id)
+        .then((res) => {
+          setTodos(res.unfinishedTasks);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   }, []);
 
   const onSubmit = ({ task }: ITodo) => {

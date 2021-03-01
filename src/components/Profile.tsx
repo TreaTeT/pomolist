@@ -18,6 +18,7 @@ function Profile() {
       console.log("no user logged in");
     }
   }, []);
+
   return (
     <div className="min-h-screen min-w-full bg-gradient-to-b from-blue-700 to-blue-500 flex items-center">
       <div className="bg-white flex-col sm:w-6/12 lg:w-3/12 mx-auto shadow-2xl ring-8 ring-blue-300 ring-opacity-50">
@@ -28,40 +29,63 @@ function Profile() {
                 className="outline-none font-roboto text-3xl text-blue-600 font-semibold"
                 to="/"
               >
-                {"⇠"}
+                <svg
+                  className="m-2"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="13.503"
+                  height="23.619"
+                  viewBox="0 0 13.503 23.619"
+                >
+                  <path
+                    fill="#2563EB"
+                    id="Icon_ionic-ios-arrow-back"
+                    data-name="Icon ionic-ios-arrow-back"
+                    d="M15.321,18l8.937-8.93a1.688,1.688,0,0,0-2.391-2.384L11.742,16.8a1.685,1.685,0,0,0-.049,2.327L21.86,29.32a1.688,1.688,0,0,0,2.391-2.384Z"
+                    transform="translate(-11.25 -6.194)"
+                  />
+                </svg>
               </Link>
             </div>
-            <p className="text-center font-semibold text-3xl text-blue-500 m-5">
-              {"TreaTeT"}
+            <p className="text-center font-roboto font-semibold text-3xl text-blue-500 mx-5">
+              {user.name}
             </p>
-            <div className="flex justify-center">
-              <div className="mx-10 mt-2 mb-5 text-center">
-                <p className="font-semibold text-blue-600 border-b border-blue-400">
-                  Session
+            <p className="text-center font-roboto font-thin text-md text-blue-800 mx-2 opacity-70">
+              {user.email}
+            </p>
+            <div className="flex justify-center w-11/12 mx-auto my-5 py-10">
+              <div className="mx-10 mt-2 mb-5 w-10/12">
+                <p className="font-semibold text-blue-600 border-b tracking-wide border-blue-400 text-xl font-roboto">
+                  Stats
                 </p>
-                <p className="pt-1 text-blue-400 font-semibold">{`Cycles: ${0}`}</p>
-                <p className="pt-1 text-blue-400 font-semibold">{`Tasks: ${0}`}</p>
-              </div>
-              <div className="mx-10 mt-2 mb-5 text-center">
-                <p className="font-semibold text-blue-600 border-b border-blue-400">
+                <div
+                  className="
+                w-full justify-around"
+                >
+                  <div className="flex justify-between py">
+                    <p className="pt-1 font-roboto font-light text-blue-400 ">{`Cycles`}</p>
+                    <p className="pt-1 font-roboto text-blue-400 font-semibold">
+                      {user.cycles}
+                    </p>
+                  </div>
+
+                  <div className="flex justify-between py">
+                    <p className="pt-1 font-roboto text-blue-400 font-light">{`Tasks`}</p>
+                    <p className="pt-1 font-roboto text-blue-400 font-semibold">
+                      {user.tasks}
+                    </p>
+                  </div>
+                </div>
+                <p className="font-semibold text-blue-600 border-b tracking-wide border-blue-400 text-xl font-roboto">
                   Total
                 </p>
-                <p className="pt-1 text-blue-400 font-semibold">{`Cycles: 110`}</p>
-                <p className="pt-1 text-blue-400 font-semibold">{`Tasks: 10`}</p>
+                <p className="text-center font-roboto text-blue-600 font-bold text-2xl mt-5">
+                  {Math.round((user.cycles * 25) / 60)}
+                </p>
+                <p className="text-center font-roboto text-blue-400">
+                  {" hours of productivity!"}
+                </p>
               </div>
             </div>
-            <div className="flex justify-center ">
-              <div className="flex sm:flex-col justify-center items-center  py-1">
-                <p className="px-1 text-md font-semibold text-blue-600">{`That sums up to total of `}</p>
-                <p className="px-1 text-3xl font-bold text-red-500 font-trocchi pb-1">{` ${Math.round(
-                  (1200 * 25) / 60
-                )} `}</p>
-                <p className="px-1 text-md font-semibold text-blue-600">{` hours of productive time!`}</p>
-              </div>
-            </div>
-            <p className="text-center text-3xl font-trocchi text-green-400 m-5">
-              Great Work!
-            </p>
           </div>
         ) : (
           <div className="flex justify-center m-10">
