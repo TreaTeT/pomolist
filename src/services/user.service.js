@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth.header";
 
-const API_URL = "http://localhost:5000/api/users/";
+const API_URL = "https://pomolist.herokuapp.com/";
 
 class UserService {
   getUserTasks(id) {
