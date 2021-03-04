@@ -38,7 +38,6 @@
   },
   "scripts": {
     "start": "craco start",
-    "heroku-postbuild": "cd backend && npm install && node server.js",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
