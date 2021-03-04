@@ -80,7 +80,7 @@ function Home() {
               });
             }
           }}
-          className="text-blue-600 w-1/12 mx-auto text-3xl cursor-pointer"
+          className="flex text-blue-600 w-1/12  justify-center mx-auto text-3xl cursor-pointer"
         >
           <svg
             className="animate-bounce"
