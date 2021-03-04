@@ -37,8 +37,8 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "heroku-postbuild": "craco start",
-    "start": "cd backend && node server.js",
+    "start": "craco start",
+    "heroku-postbuild": "cd backend && node server.js",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
