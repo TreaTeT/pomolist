@@ -78,7 +78,6 @@ function Login() {
           ) : (
             ""
           )}
-          {/* USERNAME */}
           <div className="w-full pb-3">
             <p className="w-3/4  tracking-wide mx-auto text-blue-600 leading-relaxed font-roboto text-lg ">
               username
@@ -96,7 +95,6 @@ function Login() {
             )}
           </div>
 
-          {/* PASSWORD */}
           <div className="w-full">
             <p className="w-3/4 mx-auto  tracking-widetext-blue-500 leading-relaxed font-roboto text-blue-600 text-lg mb-1">
               password

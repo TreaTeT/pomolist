@@ -32,7 +32,6 @@ function Home() {
         className="flex w-full justify-center items-center flex-col min-h-screen"
       >
         <Timer />
-
         <p
           onClick={() => {
             if (taskView.current) {
@@ -104,7 +103,7 @@ function Home() {
             <div className="fixed flex py-5 items-center">
               <Link
                 to="/profile"
-                className="mx-1 flex outline-none tracking-wide bg-blue-500 rounded border-b-2 box-content border-blue-800  py-2  text-white hover:bg-blue-400 hover:border-blue-600 px-2 font-semibold"
+                className="mx-1 flex outline-none tracking-wide bg-blue-500 rounded border-b-2 box-content border-blue-700  py-2  text-white hover:bg-blue-400 hover:border-blue-600 px-2 font-semibold"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

@@ -1,7 +1,7 @@
 import React from "react";
 import UserService from "../services/user.service";
 import AuthService from "../services/auth.service";
-// LOOK INTO USEREDUCER FOR THIS
+
 interface ITimer {
   running: boolean;
   minutes: string;
@@ -20,8 +20,36 @@ function Timer() {
   });
 
   React.useEffect(() => {
+    let savedTime = localStorage.getItem("time");
+    let savedTimer = localStorage.getItem("timer");
+
+    if (savedTime !== null) {
+      setTime(parseInt(savedTime));
+      localStorage.removeItem("time");
+      let calc_minutes = Math.floor(parseInt(savedTime) / 60);
+      let calc_seconds = parseInt(savedTime) - calc_minutes * 60;
+
+      let updatedTimer = timer;
+      updatedTimer["minutes"] = calc_minutes.toString();
+      updatedTimer["seconds"] = calc_seconds.toString();
+
+      setTimer(updatedTimer);
+    }
+    if (savedTimer !== null) {
+      setTimer(JSON.parse(savedTimer));
+      localStorage.removeItem("timer");
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (time) {
+      localStorage.setItem("time", JSON.stringify(time));
+    }
+  }, [time]);
+
+  React.useEffect(() => {
     if (timer.running) {
-      time > 0 && setTimeout(() => setTime(time - 1), 1000);
+      time > 0 && setTimeout(() => setTime(time - 1), 100);
       let calc_minutes = Math.floor(time / 60);
       let calc_seconds = time - calc_minutes * 60;
       setTimer({
@@ -41,6 +69,7 @@ function Timer() {
           });
           setTime(1200);
           updateCycles();
+          localStorage.setItem("timer", JSON.stringify(timer));
         } else if (timer.work) {
           setTimer({
             running: false,
@@ -51,6 +80,7 @@ function Timer() {
           });
           updateCycles();
           setTime(300);
+          localStorage.setItem("timer", JSON.stringify(timer));
         } else {
           setTimer({
             running: false,
@@ -60,6 +90,7 @@ function Timer() {
             cycles: timer.cycles + 1,
           });
           setTime(1500);
+          localStorage.setItem("timer", JSON.stringify(timer));
         }
       }
     }
@@ -92,13 +123,42 @@ function Timer() {
       </div>
 
       <div>
-        <div className="bg-blue-500 shadow-md  px-8  border-b-5 rounded-lg border-blue-700">
+        <div className=" bg-blue-500 shadow-md px-8  mt-2 border-b-5 rounded-lg border-blue-700">
           <p className="text-white text-11xl font-bold font-roboto">
             {("0" + timer.minutes).slice(-2) +
               ":" +
               ("0" + timer.seconds).slice(-2)}
           </p>
+          <svg
+            onClick={() => {
+              if (!timer.running) {
+                setTime(1500);
+                setTimer({
+                  running: false,
+                  minutes: "25",
+                  seconds: "0",
+                  cycles: 0,
+                  work: true,
+                });
+              } else {
+                console.log("you need to stop the timer before reseting");
+              }
+            }}
+            className="mx-auto mb-1 cursor-pointer"
+            xmlns="http://www.w3.org/2000/svg"
+            width="15.955"
+            height="16"
+            viewBox="0 0 35.955 36"
+            fill="#1D4ED8"
+          >
+            <path
+              id="Icon_open-reload"
+              data-name="Icon open-reload"
+              d="M18,0A18,18,0,1,0,30.78,30.78l-3.24-3.24A13.51,13.51,0,1,1,17.955,4.5a13.091,13.091,0,0,1,9.4,4.095L22.455,13.5h13.5V0L30.6,5.355A17.9,17.9,0,0,0,17.955,0Z"
+            />
+          </svg>
         </div>
+
         <div
           onClick={() => {
             timer.running

@@ -11,11 +11,20 @@ function Tasks() {
     checked: boolean;
   }
 
+  interface IUser {
+    id: string;
+    name: string;
+    cycles: number;
+    tasks: number;
+  }
+
   const { register, handleSubmit, reset } = useForm<ITodo>();
   const [todos, setTodos] = React.useState<ITodo[]>([]);
+  const [user, setUser] = React.useState<IUser | null>();
 
   React.useEffect(() => {
     if (AuthService.getCurrentUser()) {
+      setUser(AuthService.getCurrentUser());
       UserService.getUserTasks(AuthService.getCurrentUser().id)
         .then((res) => {
           setTodos(res.unfinishedTasks);
@@ -29,35 +38,59 @@ function Tasks() {
   const onSubmit = ({ task }: ITodo) => {
     let id = uuidv4();
     setTodos([...todos, { task: task, _id: id, checked: false }]);
-    UserService.saveUnfinishedTasks(AuthService.getCurrentUser().id, [
-      ...todos,
-      { task: task, _id: id, checked: false },
-    ]);
+    if (user) {
+      UserService.saveUnfinishedTasks(user.id, [
+        ...todos,
+        { task: task, _id: id, checked: false },
+      ]);
+    }
     reset();
   };
 
   const handleDelete = (id: string): void => {
     setTodos(todos.filter((todo) => todo._id !== id));
-    UserService.saveUnfinishedTasks(
-      AuthService.getCurrentUser().id,
-      todos.filter((todo) => todo._id !== id)
-    );
+
+    if (user) {
+      UserService.saveUnfinishedTasks(
+        user.id,
+        todos.filter((todo) => todo._id !== id)
+      );
+    }
   };
 
+  // update the amount of tasks done in db
   const updateTasks = (t = 1) => {
-    if (AuthService.getCurrentUser()) {
-      let { id, cycles, tasks } = AuthService.getCurrentUser();
-      let user = AuthService.getCurrentUser();
-      user["tasks"] = tasks + 1;
-      console.log(user);
+    if (user) {
+      let { id, cycles, tasks } = user;
+      let updatedUser = user;
+      updatedUser["tasks"] = tasks + t;
       UserService.updateStats(id, tasks + t, cycles)
         .then((res) => {
-          localStorage.setItem("user", JSON.stringify(user));
+          localStorage.setItem("user", JSON.stringify(updatedUser));
           console.log(res);
         })
         .catch((err) => {
           console.error(err);
         });
+    }
+  };
+
+  //  cross the text and set todo as checked in the db
+  const handleCheck = (index: number) => {
+    let newArr = [...todos];
+    newArr[index] = {
+      ...newArr[index],
+      checked: !newArr[index].checked,
+    };
+    setTodos(newArr);
+
+    if (user) {
+      UserService.saveUnfinishedTasks(user.id, newArr);
+      if (newArr[index].checked) {
+        updateTasks();
+      } else {
+        updateTasks(-1);
+      }
     }
   };
 
@@ -103,26 +136,16 @@ function Tasks() {
               className="lg:w-4/12 w-8/12 mx-auto flex  m-5  py-2 border-b border-blue-600 justify-between"
             >
               <div className="flex">
-                <div className="flex items-center  mr-4 ">
+                <div className="flex items-center mr-4">
                   <input
                     type="checkbox"
                     id="A3-yes"
                     name="A3-confirmation"
+                    checked={todo.checked}
                     className="cursor-pointer opacity-0 absolute h-5 w-5"
-                    onChange={() => {
-                      let newArr = [...todos];
-                      newArr[index] = {
-                        ...newArr[index],
-                        checked: !newArr[index].checked,
-                      };
-                      setTodos(newArr);
-                      if (newArr[index].checked) {
-                        updateTasks();
-                      } else {
-                        updateTasks(-1);
-                      }
-                    }}
+                    onChange={() => handleCheck(index)}
                   />
+
                   <div className="bg-white border-2 rounded-md border-blue-400 w-5 h-5 flex flex-shrink-0 justify-center items-center mr-2 focus-within:border-blue-500">
                     <svg
                       className="fill-current hidden w-3 h-3 text-blue-600 pointer-events-none"
