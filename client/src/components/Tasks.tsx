@@ -49,7 +49,6 @@ function Tasks() {
 
   const handleDelete = (id: string): void => {
     setTodos(todos.filter((todo) => todo._id !== id));
-
     if (user) {
       UserService.saveUnfinishedTasks(
         user.id,

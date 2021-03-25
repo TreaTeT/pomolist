@@ -19,6 +19,10 @@ function Timer() {
     work: true,
   });
 
+  const timerEndSound = new Audio(
+    "https://assets.coderrocketfuel.com/pomodoro-times-up.mp3"
+  );
+
   React.useEffect(() => {
     let savedTime = localStorage.getItem("time");
     let savedTimer = localStorage.getItem("timer");
@@ -49,7 +53,7 @@ function Timer() {
 
   React.useEffect(() => {
     if (timer.running) {
-      time > 0 && setTimeout(() => setTime(time - 1), 100);
+      time > 0 && setTimeout(() => setTime(time - 1), 1000);
       let calc_minutes = Math.floor(time / 60);
       let calc_seconds = time - calc_minutes * 60;
       setTimer({
@@ -67,6 +71,7 @@ function Timer() {
             work: false,
             cycles: 0,
           });
+          timerEndSound.play();
           setTime(1200);
           updateCycles();
           localStorage.setItem("timer", JSON.stringify(timer));
@@ -78,6 +83,7 @@ function Timer() {
             work: false,
             cycles: timer.cycles + 1,
           });
+          timerEndSound.play();
           updateCycles();
           setTime(300);
           localStorage.setItem("timer", JSON.stringify(timer));
@@ -89,6 +95,7 @@ function Timer() {
             work: true,
             cycles: timer.cycles + 1,
           });
+          timerEndSound.play();
           setTime(1500);
           localStorage.setItem("timer", JSON.stringify(timer));
         }
