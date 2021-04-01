@@ -139,14 +139,25 @@ function Timer() {
           <svg
             onClick={() => {
               if (!timer.running) {
-                setTime(1500);
-                setTimer({
-                  running: false,
-                  minutes: "25",
-                  seconds: "0",
-                  cycles: 0,
-                  work: true,
-                });
+                if (timer.work) {
+                  setTime(1500);
+                  setTimer({
+                    running: false,
+                    minutes: "25",
+                    seconds: "0",
+                    cycles: 0,
+                    work: true,
+                  });
+                } else {
+                  setTime(300);
+                  setTimer({
+                    running: false,
+                    minutes: "5",
+                    seconds: "0",
+                    cycles: 0,
+                    work: false,
+                  });
+                }
               } else {
                 console.log("you need to stop the timer before reseting");
               }

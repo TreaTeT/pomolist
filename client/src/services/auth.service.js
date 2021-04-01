@@ -17,10 +17,12 @@ class AuthService {
       });
   }
 
+  // remove user from current session
   logout() {
     localStorage.removeItem("user");
   }
 
+  // register new user
   register(name, email, password) {
     return axios.post(API_URL + "signup", {
       headers: { "Access-Control-Allow-Origin": "*" },
@@ -30,6 +32,7 @@ class AuthService {
     });
   }
 
+  // return user in current session
   getCurrentUser() {
     return JSON.parse(localStorage.getItem("user"));
   }
